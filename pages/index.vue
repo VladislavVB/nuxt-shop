@@ -4,10 +4,12 @@
       <div class="catalog">
         <div class="catalog__hedaer">
           <h1>Каталог</h1>
-          <div class="catalog__hedaer-sort">Сортировать по: цене</div>
+          <div class="catalog__hedaer-sort">
+            Сортировать по: <Select :options="sort" />
+          </div>
         </div>
         <div class="catalog__body">
-          <catalog-menu :category="category"/>
+          <catalog-menu :category="category" />
         </div>
       </div>
     </div>
@@ -25,6 +27,10 @@ export default {
         { id: 2, name: "Сумки-мессенджеры" },
         { id: 3, name: "Деловые сумки" },
       ],
+      sort: [
+        {value: 'price', title: 'По цене'},
+        {value: 'popular', title: 'По популярности'},
+      ]
     };
   },
 };
