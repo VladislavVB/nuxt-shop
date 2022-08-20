@@ -1,7 +1,7 @@
-import catalog from "@/store/modules/catalog";
+import catalog from '@/store/modules/catalog'
 const modules = {
-  catalog,
-};
+  catalog 
+}
 export default {
-  modules,
-};
+  modules
+}
