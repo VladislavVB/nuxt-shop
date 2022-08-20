@@ -13,6 +13,7 @@
             />
           </div>
         </div>
+        {{this.$state}}
         <div class="catalog__body">
           <SideMenu :category="category" />
           <CatalogList />
@@ -22,7 +23,6 @@
   </div>
 </template>
 <script>
-import { actionTypes } from "@/store/modules/catalog";
 import CatalogMenu from "~/components/SideMenu.vue";
 export default {
   components: { CatalogMenu },
@@ -46,7 +46,6 @@ export default {
       this.sortSelect = item;
     },
     getProduct() {
-      this.$store.dispatch('getProduct')
     }
   },
   mounted() {

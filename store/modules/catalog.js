@@ -1,25 +1,24 @@
+export const state = () => ({
+  counter: 10
+})
 
+export const getters = {
+  getCounter(state) {
+    return state.counter
+  }
+}
 
-import axios from "axios";
-export const state = {
-  loading: false,
-  products: null,
-};
+export const mutations = {
+  increment(state) {
+    state.counter++
+  }
+}
 
-export const mutationsType = {};
-export const actionsType = {
-  getProduct: "[catalog] getProduct",
-};
-export const gettersType = {};
-
-export const mutations = {};
 export const actions = {
-  getProduct(context, commit) {
-    console.log(11111111111);
-
-    axios.get("/product").then((res) => {
-      console.log(res);
-    });
-  },
-};
-export const getters = {};
+  async fetchCounter(state) {
+    // make request
+    const res = { data: 10 };
+    state.counter = res.data;
+    return res.data;
+  }
+}
