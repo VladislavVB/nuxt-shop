@@ -13,7 +13,7 @@
             />
           </div>
         </div>
-        {{this.$state}}
+        
         <div class="catalog__body">
           <SideMenu :category="category" />
           <CatalogList />

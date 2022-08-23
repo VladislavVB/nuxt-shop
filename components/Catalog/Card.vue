@@ -12,9 +12,7 @@
   </div>
 </template>
 <script>
-import PriceFormatter from "~/mixins.js/priceFormatter";
 export default {
-  mixins: [PriceFormatter],
   data() {
     return {
       card: {
