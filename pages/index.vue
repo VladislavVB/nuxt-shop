@@ -13,10 +13,14 @@
             />
           </div>
         </div>
-        
+
         <div class="catalog__body">
-          <SideMenu :category="category" />
-          <CatalogList />
+          <SideMenu :category="category" @selectCategory="setCategory" />
+          <CatalogList
+            :sortProp="sortSelect"
+            :productListProp="productList"
+            :selectCategory="setCategoryValue"
+          />
         </div>
       </div>
     </div>
@@ -29,27 +33,32 @@ export default {
   name: "IndexPage",
   data() {
     return {
-      category: [
-        { id: 1, name: "Рюкзаки" },
-        { id: 2, name: "Сумки-мессенджеры" },
-        { id: 3, name: "Деловые сумки" },
-      ],
+      category: [],
+      setCategoryValue: {},
       sort: [
         { value: "price", title: "цене" },
-        { value: "popular", title: "популярности" },
+        { value: "rating", title: "популярности" },
       ],
       sortSelect: { value: "price", title: "цене" },
+      productList: [],
     };
+  },
+  async fetch() {
+    this.category = await this.$axios.$get(
+      `https://frontend-test.idaproject.com/api/product-category`
+    );
+
+    this.productList = await this.$axios.$get(
+      `https://frontend-test.idaproject.com/api/product`
+    );
   },
   methods: {
     selectedOption(item) {
       this.sortSelect = item;
     },
-    getProduct() {
-    }
-  },
-  mounted() {
-    this.getProduct()
+    setCategory(item) {
+      this.setCategoryValue = item;
+    },
   },
 };
 </script>
@@ -80,5 +89,4 @@ export default {
     }
   }
 }
-
 </style>

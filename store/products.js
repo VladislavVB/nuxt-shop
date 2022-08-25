@@ -1,5 +1,5 @@
 export const state = () => ({
-  products: 'saaaaaaaaaaaaaaaaaaaaaa',
+  products: [],
 })
 
 export const mutations = {

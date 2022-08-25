@@ -22,6 +22,7 @@ export default {
   methods: {
     selectCategory(item, index) {
       this.categoryActive = index;
+      this.$emit('selectCategory', item)
     },
   },
 };

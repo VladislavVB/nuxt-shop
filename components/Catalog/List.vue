@@ -1,37 +1,41 @@
 <template>
   <div class="catalog__list">
     <CatalogCard
-      v-for="product in productList"
+      v-for="product in productListFiltered"
       :key="product.id"
       :card="product"
     />
   </div>
 </template>
 <script>
-import { mapGetters } from "vuex";
 export default {
+  props: ["selectCategory", "productListProp", "sortProp"],
   data() {
     return {
-      productList: [],
-    }
+      productListFiltered: this.productListProp,
+      
+    };
   },
   methods: {
-    getProducts() {
-      this.$store.dispatch("products/getProducts");
+    setCategory(item) {
+      this.productListFiltered = this.productListProp.filter(
+        (prod) => prod.category === item.id
+      );
     },
+    sortList(item) {
+      console.log(this.productListFiltered);
+      // this.productListFiltered.sort()
+      // this.productListFiltered.sort((a, b) => console.log(a, b))
+      this.productListFiltered = this.productListFiltered.sort((a, b) => a[item.value] > b[item.value] ? 1 : -1);
+    }
   },
-  computed: {
-    ...mapGetters({
-       getProductsGetters: "products/getProducts",
-    }),
-  },
-  mounted() {
-    this.getProducts();
-    console.log(this.getProductsGetters);
-    this.productList = this.getProductsGetters
-    // console.log(mapGetters);
-    // console.log(this.$store);
-    // console.log(this.$store.getters);
+  watch: {
+    selectCategory(newVal, oldVal) {
+      this.setCategory(newVal);
+    },
+    sortProp(newVal, oldVal) {
+      this.sortList(newVal)
+    }
   },
 };
 </script>
