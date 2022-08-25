@@ -1,7 +1,7 @@
 <template>
   <div class="catalog__list">
     <CatalogCard
-      v-for="product in getProductsGetters"
+      v-for="product in productList"
       :key="product.id"
       :card="product"
     />
@@ -10,6 +10,11 @@
 <script>
 import { mapGetters } from "vuex";
 export default {
+  data() {
+    return {
+      productList: [],
+    }
+  },
   methods: {
     getProducts() {
       this.$store.dispatch("products/getProducts");
@@ -17,14 +22,16 @@ export default {
   },
   computed: {
     ...mapGetters({
-      getProductsGetters: "products/getProducts",
+       getProductsGetters: "products/getProducts",
     }),
   },
   mounted() {
     this.getProducts();
+    console.log(this.getProductsGetters);
+    this.productList = this.getProductsGetters
     // console.log(mapGetters);
-    console.log(this.$store);
-    console.log(this.$store.getters);
+    // console.log(this.$store);
+    // console.log(this.$store.getters);
   },
 };
 </script>
