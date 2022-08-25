@@ -1,12 +1,14 @@
 <template>
   <div class="catalog__list">
-    <!-- <CatalogCard /> -->
-    {{products}}
-    
+    <CatalogCard
+      v-for="product in getProductsGetters"
+      :key="product.id"
+      :card="product"
+    />
   </div>
 </template>
 <script>
-// import { mapGetters } from "vuex";
+import { mapGetters } from "vuex";
 export default {
   methods: {
     getProducts() {
@@ -14,10 +16,9 @@ export default {
     },
   },
   computed: {
-    products() {
-      return this.$store.state.products.getProducts
-    }
-    // ...mapGetters("products", ['getProducts'])
+    ...mapGetters({
+      getProductsGetters: "products/getProducts",
+    }),
   },
   mounted() {
     this.getProducts();
@@ -32,7 +33,7 @@ export default {
   &__list {
     width: 84%;
     display: grid;
-    // grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 16px 16px;
     grid-auto-flow: row;
   }
