@@ -70,8 +70,16 @@ export default {
   data() {
     return {};
   },
+  transition: {
+    name: "home",
+    mode: "out-in",
+  },
 };
 </script>
+<style>
+  .home-enter-active, .home-leave-active { transition: opacity .5s; }
+  .home-enter, .home-leave-active { opacity: 0; }
+</style>
 <style lang="scss" scoped>
 .card {
   &__wrapper {
@@ -83,8 +91,9 @@ export default {
     // height: 272px;
     transition: 0.3s;
     padding: 15px;
-    // &:hover {
-    // }
+    &:hover {
+      transform: scale(0.98);
+    }
   }
   &__hoode {
     position: relative;

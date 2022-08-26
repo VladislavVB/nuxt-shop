@@ -13,6 +13,7 @@ export default {
   data() {
     return {
       productListFiltered: this.productListProp,
+      sortData: null
       
     };
   },
@@ -21,6 +22,7 @@ export default {
       this.productListFiltered = this.productListProp.filter(
         (prod) => prod.category === item.id
       );
+      this.sortList(this.sortData)
     },
     sortList(item) {
       console.log(this.productListFiltered);
@@ -34,6 +36,7 @@ export default {
       this.setCategory(newVal);
     },
     sortProp(newVal, oldVal) {
+      this.sortData = newVal
       this.sortList(newVal)
     }
   },

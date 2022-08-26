@@ -60,6 +60,12 @@ export default {
       this.setCategoryValue = item;
     },
   },
+  mounted() {
+    document.querySelectorAll(".select__options-item")[0].click();
+    setTimeout(() => {
+      document.querySelectorAll(".catalog__menu li")[0].click();
+    }, 0);
+  },
 };
 </script>
 <style lang="scss" scoped>
