@@ -4,7 +4,7 @@
       <div class="container">
         <div class="header">
           <nuxt-link to="/" class="header__logo">TestList</nuxt-link>
-          <div class="header__basket">
+          <div @click.stop="openBasket" class="header__basket">
             <div class="header__basket-counter">11</div>
             <img src="../assets/image/cart.png" alt="" />
           </div>
@@ -13,11 +13,19 @@
     </header>
     <div :style="`margin-top: ${heightHeder}px`"></div>
     <Nuxt />
+    <Basket/>
   </div>
 </template>
 <script>
+import Basket from '~/components/Basket.vue'
 export default {
+  components: { Basket },
   name: 'default-layouts',
+  methods: {
+    openBasket() {
+      
+    }
+  },
   computed: {
     heightHeder() {
       // const hederWrapper = element.querySelector('.header__wrapper');
