@@ -25,9 +25,6 @@ export default {
       this.sortList(this.sortData)
     },
     sortList(item) {
-      console.log(this.productListFiltered);
-      // this.productListFiltered.sort()
-      // this.productListFiltered.sort((a, b) => console.log(a, b))
       this.productListFiltered = this.productListFiltered.sort((a, b) => a[item.value] > b[item.value] ? 1 : -1);
     }
   },

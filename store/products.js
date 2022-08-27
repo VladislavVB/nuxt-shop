@@ -1,21 +1,13 @@
 export const state = () => ({
-  products: [],
-})
+  countProducts: 0,
+});
 
 export const mutations = {
-  addProducts(state, data) {
-    state.products = data
-  }
-}
-export const actions = {
-  async getProducts({commit}) {
-    const products = await this.$axios.$get('https://frontend-test.idaproject.com/api/product');
-    commit('addProducts', products)
-  }
-}
-
-export const getters = {
-  getProducts: (state) => {
-    return state.products
-  }
-}
+  calculateProduct(state) {
+    if (localStorage.getItem("basket") != null) {
+      state.countProducts = JSON.parse(localStorage.getItem("basket")).length;
+    } else {
+      state.countProducts = 0;
+    }
+  },
+};

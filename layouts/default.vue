@@ -5,7 +5,7 @@
         <div class="header">
           <nuxt-link to="/" class="header__logo">TestList</nuxt-link>
           <div @click.stop="openBasket" class="header__basket">
-            <div class="header__basket-counter">11</div>
+            <div v-if="countBasket != 0" class="header__basket-counter">{{ countBasket }}</div>
             <img src="../assets/image/cart.png" alt="" />
           </div>
         </div>
@@ -13,28 +13,40 @@
     </header>
     <div :style="`margin-top: ${heightHeder}px`"></div>
     <Nuxt />
-    <Basket/>
+
+    <Basket @hide="hideBasket" :showProp="show" />
   </div>
 </template>
 <script>
-import Basket from '~/components/Basket.vue'
+import Basket from "~/components/Basket/Index.vue";
 export default {
   components: { Basket },
-  name: 'default-layouts',
+  name: "default-layouts",
+  data() {
+    return {
+      show: false,
+    };
+  },
   methods: {
     openBasket() {
-      
-    }
+      this.show = true;
+    },
+    hideBasket() {
+      this.show = false;
+    },
   },
   computed: {
     heightHeder() {
-      // const hederWrapper = element.querySelector('.header__wrapper');
-      // console.log(hederWrapper.style.height);
-      // return hederWrapper.style.height
-      return 66
-    }
-  }
-}
+      return 66;
+    },
+    countBasket() {
+      return this.$store.state.basket.countProducts;
+    },
+  },
+  mounted() {
+    this.$store.commit("basket/calculateProduct");
+  },
+};
 </script>
 <style lang="scss">
 .header {

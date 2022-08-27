@@ -23,7 +23,7 @@
         </svg>
         {{ card.rating }}
       </div>
-      <div class="card__hoode-basket">
+      <div @click.stop="addBasket" class="card__hoode-basket">
         <svg
           width="16"
           height="16"
@@ -67,18 +67,30 @@
 <script>
 export default {
   props: ["card"],
-  data() {
-    return {};
-  },
-  transition: {
-    name: "home",
-    mode: "out-in",
+  methods: {
+    addBasket() {
+      if (localStorage.getItem("basket") === null) {
+        localStorage.setItem("basket", "[]");
+      }
+      let products = JSON.parse(localStorage.getItem("basket"));
+      products.push(this.card);
+
+      localStorage.setItem("basket", JSON.stringify(products));
+      this.$store.commit("basket/calculateProduct");
+      // return this.$store.state.products.getProducts
+    },
   },
 };
 </script>
 <style>
-  .home-enter-active, .home-leave-active { transition: opacity .5s; }
-  .home-enter, .home-leave-active { opacity: 0; }
+.home-enter-active,
+.home-leave-active {
+  transition: opacity 0.5s;
+}
+.home-enter,
+.home-leave-active {
+  opacity: 0;
+}
 </style>
 <style lang="scss" scoped>
 .card {
@@ -111,6 +123,7 @@ export default {
     &-basket {
       top: 0;
       right: 0;
+      cursor: pointer;
       position: absolute;
     }
   }
