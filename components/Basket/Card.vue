@@ -105,6 +105,9 @@ export default {
   }
   &__desc {
     width: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     margin-left: 20px;
     h5 {
       font-size: 14px;
@@ -118,6 +121,14 @@ export default {
       font-size: 14px;
       line-height: 18px;
       color: #1f1f1f;
+    }
+    .raiting {
+      display: flex;
+      align-items: center;
+      font-weight: 700;
+      font-size: 10px;
+      line-height: 13px;
+      color: #f2c94c;
     }
   }
   &__del {

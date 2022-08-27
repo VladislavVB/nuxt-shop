@@ -139,6 +139,7 @@ export default {
       }
       &__content {
         &-wrapper {
+          margin-bottom: 32px;
           h5 {
             font-size: 18px;
             line-height: 23px;
