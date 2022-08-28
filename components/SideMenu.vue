@@ -62,4 +62,12 @@ export default {
     }
   }
 }
+@media (max-width: 576px) {
+  .catalog__menu-wrapper {
+    .catalog__menu {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+}
 </style>

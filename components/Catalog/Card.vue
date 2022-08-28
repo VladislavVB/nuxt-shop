@@ -60,7 +60,7 @@
     </div>
     <div class="card__desc">
       <h6>{{ card.name }}</h6>
-      <h5>{{ card.price }} ₽</h5>
+      <h5>{{ priceFormatter }} ₽</h5>
     </div>
   </div>
 </template>
@@ -78,6 +78,13 @@ export default {
       localStorage.setItem("basket", JSON.stringify(products));
       this.$store.commit("basket/calculateProduct");
       // return this.$store.state.products.getProducts
+    },
+  },
+  computed: {
+    priceFormatter() {
+      return this.card.price
+        .toString()
+        .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, " ");
     },
   },
 };
@@ -125,6 +132,18 @@ export default {
       right: 0;
       cursor: pointer;
       position: absolute;
+      svg {
+        path {
+          transition: 0.3s;
+        }
+      }
+      &:hover {
+        svg {
+          path {
+            fill: #1f1f1f;
+          }
+        }
+      }
     }
   }
   &__image {
@@ -143,6 +162,10 @@ export default {
       font-size: 14px;
       line-height: 18px;
       color: #59606d;
+      text-transform: lowercase;
+      &:first-letter {
+        text-transform: uppercase;
+      }
     }
     h5 {
       font-weight: 700;

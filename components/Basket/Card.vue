@@ -6,7 +6,7 @@
     <div class="card__desc">
       <div>
         <h5>{{ card.name }}</h5>
-        <h6>{{ card.price }} ₽</h6>
+        <h6>{{ priceFormatter }} ₽</h6>
       </div>
       <div class="raiting">
         <svg
@@ -75,6 +75,13 @@ export default {
       this.$emit("delCard", this.card);
     },
   },
+  computed: {
+    priceFormatter() {
+      return this.card.price
+        .toString()
+        .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, " ");
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>
@@ -115,6 +122,10 @@ export default {
       line-height: 18px;
       color: #59606d;
       margin-bottom: 6px;
+      text-transform: lowercase;
+      &:first-letter {
+        text-transform: uppercase;
+      }
     }
     h6 {
       font-weight: 700;

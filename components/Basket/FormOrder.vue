@@ -4,9 +4,12 @@
       <h6>Оформить заказ</h6>
       <div class="inputs">
         <div :class="{ error: !nameValidation }" class="input__wrapper">
+          <span :class="{ active: !nameValidation }">Обязательное поле</span>
           <input v-model="name" type="text" placeholder="Ваше имя" />
         </div>
         <div :class="{ error: !phoneValidation }" class="input__wrapper">
+          <span :class="{ active: !phoneValidation }">Обязательное поле</span>
+
           <input
             v-model="phone"
             type="text"
@@ -15,6 +18,8 @@
           />
         </div>
         <div :class="{ error: !emailValidation }" class="input__wrapper">
+          <span :class="{ active: !emailValidation }">Обязательное поле</span>
+
           <input v-model="email" type="text" placeholder="Адрес" />
         </div>
       </div>
@@ -44,6 +49,10 @@ export default {
           basket: JSON.parse(localStorage.getItem("basket")),
         };
         console.log(sendData);
+        this.name = "";
+        this.phone = "";
+        this.email = "";
+        this.$emit("sendFrom");
         // this.name = "";
         // this.phone = "";
         // this.email = "";
@@ -95,10 +104,30 @@ export default {
   &__wrapper {
     display: flex;
     width: 100%;
+    position: relative;
     &.error {
       input {
-        color: red;
-        border: 1px solid red;
+        color: rgba(160, 0, 0, 0.616);
+        border: 1px solid rgba(160, 0, 0, 0.616);
+      }
+    }
+    span {
+      visibility: hidden;
+      opacity: 0;
+      background-color: #fff;
+      transition: 0.3s;
+      position: absolute;
+      font-size: 14px;
+      top: -14px;
+      left: 44px;
+      color: rgba(160, 0, 0, 0.616);
+
+      &.active {
+        visibility: visible;
+        opacity: 1;
+        font-size: 14px;
+        top: -14px;
+        left: 14px;
       }
     }
     input {

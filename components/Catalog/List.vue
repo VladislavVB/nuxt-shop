@@ -13,8 +13,7 @@ export default {
   data() {
     return {
       productListFiltered: this.productListProp,
-      sortData: null
-      
+      sortData: null,
     };
   },
   methods: {
@@ -22,20 +21,22 @@ export default {
       this.productListFiltered = this.productListProp.filter(
         (prod) => prod.category === item.id
       );
-      this.sortList(this.sortData)
+      this.sortList(this.sortData);
     },
     sortList(item) {
-      this.productListFiltered = this.productListFiltered.sort((a, b) => a[item.value] > b[item.value] ? 1 : -1);
-    }
+      this.productListFiltered = this.productListFiltered.sort((a, b) =>
+        a[item.value] > b[item.value] ? 1 : -1
+      );
+    },
   },
   watch: {
     selectCategory(newVal, oldVal) {
       this.setCategory(newVal);
     },
     sortProp(newVal, oldVal) {
-      this.sortData = newVal
-      this.sortList(newVal)
-    }
+      this.sortData = newVal;
+      this.sortList(newVal);
+    },
   },
 };
 </script>
@@ -47,6 +48,17 @@ export default {
     grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 16px 16px;
     grid-auto-flow: row;
+  }
+}
+@media (max-width: 1100px) {
+  .catalog__list {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+@media (max-width: 758px) {
+  .catalog__list {
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
   }
 }
 </style>

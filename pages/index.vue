@@ -95,4 +95,9 @@ export default {
     }
   }
 }
+@media (max-width: 576px) {
+  .catalog__body {
+    flex-direction: column;
+  }
+}
 </style>
